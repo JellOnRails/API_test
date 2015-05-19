@@ -1,0 +1,11 @@
+# -- REQUEST --
+request:
+  productid: '26630'
+  investingamount:
+    currency: 'EUR'
+    decimals: 2
+    amount: '200.00'
+  leverage: 2
+  direction: 'BUY'
+
+# -- RESPONSE --
