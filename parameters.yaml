@@ -1,10 +1,6 @@
 
 # -- URL --
 make_trade: '/trades'
-get_cash_balance: '/portfolio/cashBalance' #todo improve or remove
-
-# -- HTTP METHOD --
-http_method: 'POST' #todo improve or remove
 
 # -- ENVIRONMENT --
 development: 'dev'
