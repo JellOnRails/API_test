@@ -4,11 +4,13 @@ class RequestConstructor
   attr_reader :url
   attr_reader :method_url
   attr_reader :headers
+  attr_accessor :body
 
   def initialize
     @url = "api.#{PARAMETERS[ 'development' ]}.getbux.com"
     @method_url = "/core/#{PARAMETERS[ 'version' ]}/users/me"
     @headers = {}
+    @body = {}
   end
 
   def get_api_url( api_method )
@@ -19,14 +21,9 @@ class RequestConstructor
     @headers = HEADERS[ 'request' ]
   end
 
-  #todo check and remove
-  def normalize_body( request_body )
-    request_body.gsub( "\n", '' ).gsub( /\s+/, ' ' )
-  end
-
-  def send_post_request( request_body )
+  def send_post_request
     api_request = Net::HTTP::Post.new( @method_url, @headers )
-    api_request.body = request_body  #todo check and remove -> normalize_body( request_body )
+    api_request.body = @body.to_json
 
     https = Net::HTTP.new( @url, 443 )
     https.use_ssl = true
