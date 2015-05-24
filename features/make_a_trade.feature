@@ -65,7 +65,7 @@ Feature: Make a trade / Open position
         | 26630         | BUX          | 2            |  50.00     | 2            | UP            | 500        | CORE_002     |
         | 26609         | EUR          | 2            |  50.00     | 2            | BUY           | 500        | CORE_007     |
 
-  @error_1
+  @error
   Scenario: Absent request body
     When Remove body from request
     And send POST request
