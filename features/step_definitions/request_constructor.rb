@@ -3,7 +3,7 @@ class RequestConstructor
 
   attr_reader :url
   attr_reader :method_url
-  attr_reader :headers
+  attr_accessor :headers
   attr_accessor :body
 
   def initialize
@@ -13,11 +13,11 @@ class RequestConstructor
     @body = {}
   end
 
-  def get_api_url( api_method )
+  def set_api_url( api_method )
     @method_url += PARAMETERS[ api_method ]
   end
 
-  def get_headers
+  def set_headers
     @headers = HEADERS[ 'request' ]
   end
 

@@ -2,6 +2,7 @@ Feature: Make a trade / Open position
 
   Background:
     Given Initialize make_trade API method
+    And Initialize headers
 
   @trade
   Scenario Outline: Make a trade
@@ -49,7 +50,7 @@ Feature: Make a trade / Open position
       * developerMessage should be String type
       * errorCode should be String type and have <buxErrorCode> value
 
-      Examples: Trading errors
+      Examples: Trading error
         | productId_val | currency_val | decimals_val | amount_val | leverage_val | direction_val | statusCode | buxErrorCode |
         | 26630         | EUR          | 2            |  50.00     | 2            | BUY           | 500        | CORE_011     |
         | 26609         | BUX          | 2            |  50.00     | 2            | BUY           | 400        | TRADING_007  |
@@ -63,3 +64,12 @@ Feature: Make a trade / Open position
         | productId_val | currency_val | decimals_val | amount_val | leverage_val | direction_val | statusCode | buxErrorCode |
         | 26630         | BUX          | 2            |  50.00     | 2            | UP            | 500        | CORE_002     |
         | 26609         | EUR          | 2            |  50.00     | 2            | BUY           | 500        | CORE_007     |
+
+  @error_1
+  Scenario: Absent request body
+    When Remove body from request
+    And send POST request
+    Then response status code should be 500
+    And message should be String type
+    * developerMessage should be String type
+    * errorCode should be String type and have CORE_002 value

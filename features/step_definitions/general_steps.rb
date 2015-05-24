@@ -1,8 +1,11 @@
 
 # ==== WHEN ====
 Given /^Initialize (\w+) API method$/ do | api_method |
-  @request.get_api_url api_method
-  @request.get_headers
+  @request.set_api_url api_method
+end
+
+Given /Initialize headers/ do
+  @request.set_headers
 end
 
 When /^add (\w+) with (\w+) type (\w+) to body request$/ do | param, value, type |
@@ -19,6 +22,10 @@ end
 When /^send POST request$/ do
   @response = @request.send_post_request
   @response_body = JSON.parse @response.body
+end
+
+When /^Remove body from request$/ do
+  @request.body = {}
 end
 
 # ==== THEN ====
